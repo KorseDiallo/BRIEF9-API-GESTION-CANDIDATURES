@@ -28,7 +28,24 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'durer' => 'required|string',
+        ]);
+
+        $formation = new Formation();
+        $formation->nom=$request->nom;
+        $formation->description=$request->description;
+        $formation->durer=$request->durer;
+
+        if($formation->save()){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Formation créer avec succès",
+                "data"=>$formation
+            ]);
+        }
     }
 
     /**
@@ -52,7 +69,24 @@ class FormationController extends Controller
      */
     public function update(Request $request, Formation $formation)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'durer' => 'required|string',
+        ]);
+
+        $formation->nom= $request->nom;
+        $formation->description= $request->description;
+        $formation->durer= $request->durer;
+
+        if($formation->update()){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Formation modifiée avec succès",
+                "data"=>$formation
+            ]);
+        }
+
     }
 
     /**
@@ -60,6 +94,12 @@ class FormationController extends Controller
      */
     public function destroy(Formation $formation)
     {
-        //
+        if($formation->delete()){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Suppression effectuer avec succès",
+                "data"=>$formation
+            ]);
+        }
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('description');
-            $table->date('durer');
+            $table->string('durer');
             $table->timestamps();
         });
     }

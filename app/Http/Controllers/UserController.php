@@ -111,6 +111,13 @@ public function dashboardCandidat(){
     ]);
 }
 
+public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Déconnexion effectuer avec succès']);
+    }
+
     /**
      * Display the specified resource.
      */
