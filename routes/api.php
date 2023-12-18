@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -18,17 +19,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:api','candidat'])->group(function(){
     Route::get('/dashboardCandidat',[UserController::class,'dashboardCandidat']);
+    Route::post('/candidater',[CandidatureController::class,'store']);
     Route::get('/logout',[UserController::class,'logout']);
 });
 
 Route::middleware(['auth:api','admin'])->group(function(){
     Route::get('/dashboardAdmin',[UserController::class,'dashboardAdmin']);
+    Route::post('/creerFormation',[FormationController::class,'store']);
+    Route::post('/modifierFormation/{formation}',[FormationController::class,'update']);
+    Route::delete('/supprimerFormation/{formation}',[FormationController::class,'destroy']);
+    Route::post('/accepter/{candidature}',[CandidatureController::class,'accepter']);
+    Route::post('/refuser/{candidature}',[CandidatureController::class,'refuser']);
     Route::get('/logout',[UserController::class,'logout']);
 });
 
-Route::post('/creerFormation',[FormationController::class,'store']);
-Route::post('/modifierFormation/{formation}',[FormationController::class,'update']);
-Route::delete('/supprimerFormation/{formation}',[FormationController::class,'destroy']);
+
 
 Route::post('/register',[UserController::class,'store']);
 
