@@ -65,7 +65,7 @@ class CandidatureController extends Controller
     public function accepter(Candidature $candidature)
     {
         // dd($candidature);
-        if ($candidature->status === 'enattente') {
+        if ($candidature->status === 'enattente' || $candidature->status==='refuser') {
             $candidature->status = 'accepter';
     
             if ($candidature->save()) {
