@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('telephone')->unique();
             $table->string('password');
             $table->enum('role',['Admin','Candidat']);
-            $table->rememberToken();
+            // $table->rememberToken();
             $table->timestamps();
         });
     }

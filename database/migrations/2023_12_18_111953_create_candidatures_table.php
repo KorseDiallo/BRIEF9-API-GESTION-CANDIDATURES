@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('formation_id');
             $table->foreign('formation_id')->references('id')->on('formations')->onDelete('cascade');
-            $table->enum('status',['accepter','refuser']);
+            $table->enum('status',['accepter','refuser','enattente'])->default('enattente');
             $table->timestamps();
         });
     }
