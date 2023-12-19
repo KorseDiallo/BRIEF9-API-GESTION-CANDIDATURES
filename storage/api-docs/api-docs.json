@@ -47,13 +47,24 @@
                 }
             }
         },
-        "/candidater": {
+        "/candidater/{formation}": {
             "post": {
                 "tags": [
                     "Candidature"
                 ],
                 "summary": "Cette route permet à un candidat de candidater à une formation",
-                "operationId": "3e687d4a77b5959cec344d93d87e0d9c",
+                "operationId": "6e7a624b0995e541fb4afc6b6d8ac9ee",
+                "parameters": [
+                    {
+                        "name": "formation",
+                        "in": "path",
+                        "description": "ID formation",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Candidature envoyer avec succès"

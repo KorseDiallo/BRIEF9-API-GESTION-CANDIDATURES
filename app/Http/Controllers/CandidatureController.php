@@ -88,47 +88,54 @@ class CandidatureController extends Controller
 
       /**
      * @OA\Post(
-     *     path="/candidater",
+     *     path="/candidater/{formation}",
    
        *   tags={"Candidature"},  
       *     summary="Cette route permet à un candidat de candidater à une formation",
+     *       @OA\Parameter(
+     *         name="formation",
+     *         in="path",
+     *         required=true,
+     *         description="ID formation",
+     *         @OA\Schema(type="integer")
+     *      ),
      *     @OA\Response(response="201", description="Candidature envoyer avec succès")
      * )
      */
-    public function store(Request $request)
-    {
-        // $request->validate([
-        //     'user_id' => 'required|exists:users,id',
-        //     'formation_id' => 'required|exists:formations,id',
-        // ]);
+    public function store(Formation $formation)
+{
+    $userAuth = auth()->user()->id;
 
+    // Vérifier si l'utilisateur a déjà candidaté à cette formation
+    $candidat = Candidature::where('formation_id', $formation->id)
+        ->where("user_id", $userAuth)
+        ->first();
+
+    if (!$candidat) {
         $candidature = new Candidature();
-        $userAuth= auth()->user()->id;
-        $candidature->user_id=  $userAuth;
-        $nomFormation= $request->nomFormation;
-        $candidature->formation_id = Formation::where("nom", $nomFormation)->first()->id;
+        $candidature->user_id = $userAuth;
+        $candidature->formation_id = $formation->id;
 
-
-        //verifie si la personne n'as pas dejà choisie la formation
-
-        $candidat= Candidature::where('formation_id',$candidature->formation_id)
-                ->where("user_id", $userAuth)->get()->first();
-
-        if(!$candidat){
-           if($candidature->save()){
-                return response()->json([
-                    "status"=>true,
-                    "message"=> "Candidature envoyer avec succès",
-                    "data"=>$candidature
-                ]);
-           }else{
+        if ($candidature->save()) {
             return response()->json([
-                "status"=>false,
-                "message"=> "Vous avez deja candidater à cette formation",
+                "status" => true,
+                "message" => "Candidature envoyée avec succès",
+                "data" => $candidature
             ]);
-           }
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => "Erreur lors de l'enregistrement de la candidature",
+            ]);
         }
+    } else {
+        return response()->json([
+            "status" => false,
+            "message" => "Vous avez déjà candidaté à la formation " 
+        ]);
     }
+}
+
 
      /**
      * @OA\Post(

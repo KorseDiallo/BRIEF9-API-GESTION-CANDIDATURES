@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:api','candidat'])->group(function(){
     Route::get('/dashboardCandidat',[UserController::class,'dashboardCandidat']);
-    Route::post('/candidater',[CandidatureController::class,'store']);
+    Route::post('/candidater/{formation}',[CandidatureController::class,'store']);
     Route::get('/logout',[UserController::class,'logout']);
 });
 
