@@ -86,13 +86,17 @@ class UserController extends Controller
 
     $credentials = $request->only('email', 'password');
 
-    try {
-        if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['status' => 0, 'message' => 'Identifiants invalides'], 401);
-        }
-    } catch (JWTException $e) {
-        return response()->json(['status' => 0, 'message' => 'Erreur lors de la création du token'], 500);
+    if (! $token = JWTAuth::attempt($credentials)) {
+        return response()->json(['status' => 0, 'message' => 'Identifiants invalides'], 401);
     }
+
+    // try {
+    //     if (! $token = JWTAuth::attempt($credentials)) {
+    //         return response()->json(['status' => 0, 'message' => 'Identifiants invalides'], 401);
+    //     }
+    // } catch (JWTException $e) {
+    //     return response()->json(['status' => 0, 'message' => 'Erreur lors de la création du token'], 500);
+    // }
 
     $user = JWTAuth::user();
 
