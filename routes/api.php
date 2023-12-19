@@ -30,6 +30,9 @@ Route::middleware(['auth:api','admin'])->group(function(){
     Route::delete('/supprimerFormation/{formation}',[FormationController::class,'destroy']);
     Route::post('/accepter/{candidature}',[CandidatureController::class,'accepter']);
     Route::post('/refuser/{candidature}',[CandidatureController::class,'refuser']);
+    Route::get('/listeAccepter',[CandidatureController::class,'listeAccepter']);
+    Route::get('/listeRefuser',[CandidatureController::class,'listeRefuser']);
+    Route::get('/listeEnAttente',[CandidatureController::class,'index']);
     Route::get('/logout',[UserController::class,'logout']);
 });
 

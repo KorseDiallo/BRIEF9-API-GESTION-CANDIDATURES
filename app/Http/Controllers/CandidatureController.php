@@ -13,7 +13,33 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        //
+        $listeEnattente = Candidature::where("status","accepter")->get();
+
+        return response()->json([
+            "status"=>true,
+            "message"=> "Liste de tous les candidats en attente",
+            "data"=>$listeEnattente
+        ]);
+    }
+
+    public function listeAccepter(){
+        $listesAccepter = Candidature::where("status","accepter")->get();
+
+        return response()->json([
+            "status"=>true,
+            "message"=> "Liste de tous les candidats accepter",
+            "data"=>$listesAccepter
+        ]);
+    }
+
+    public function listeRefuser(){
+        $listesRefuser = Candidature::where("status","refuser")->get();
+
+        return response()->json([
+            "status"=>true,
+            "message"=> "Liste de tous les candidats refuser",
+            "data"=>$$listesRefuser 
+        ]);
     }
 
     /**
