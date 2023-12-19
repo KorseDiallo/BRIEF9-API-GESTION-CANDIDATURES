@@ -13,7 +13,7 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        $listeEnattente = Candidature::where("status","accepter")->get();
+        $listeEnattente = Candidature::where("status","enattente")->get();
 
         return response()->json([
             "status"=>true,
@@ -38,7 +38,7 @@ class CandidatureController extends Controller
         return response()->json([
             "status"=>true,
             "message"=> "Liste de tous les candidats refuser",
-            "data"=>$$listesRefuser 
+            "data"=>$listesRefuser 
         ]);
     }
 
