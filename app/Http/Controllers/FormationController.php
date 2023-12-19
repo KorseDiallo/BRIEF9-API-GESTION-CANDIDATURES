@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
+
+
+
 
 class FormationController extends Controller
 {
@@ -25,6 +29,15 @@ class FormationController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+
+       /**
+     * @OA\Post(
+     *     path="/creerFormation",
+     *     tags={"Formation"},
+     *     summary="Cette route permet de creer une formation",
+     *     @OA\Response(response="201", description="Formation Creer avec succès")
+     * )
      */
     public function store(Request $request)
     {
@@ -67,6 +80,22 @@ class FormationController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+       /**
+     * @OA\Post(
+     *     path="/modifierFormation/{formation}",
+     *     tags={"Formation"},
+     *     summary="Cette route permet de modifier une formation",
+     *      @OA\Parameter(
+     *         name="formation",
+     *         in="path",
+     *         required=true,
+     *         description="ID formation",
+     *         @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="201", description="Formation modifier avec succès")
+     * )
+     */
     public function update(Request $request, Formation $formation)
     {
         $request->validate([
@@ -91,6 +120,22 @@ class FormationController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+
+        /**
+     * @OA\Delete(
+     *     path="/supprimerFormation/{formation}",
+     *     tags={"Formation"},
+     *     summary="Cette route permet de supprimer une formation",
+     *      @OA\Parameter(
+     *         name="formation",
+     *         in="path",
+     *         required=true,
+     *         description="ID formation",
+     *         @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="201", description="Formation supprimer avec succès")
+     * )
      */
     public function destroy(Formation $formation)
     {

@@ -1,0 +1,249 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "endPoind ",
+        "version": "1.0"
+    },
+    "paths": {
+        "/listeEnAttente": {
+            "get": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet de voir toutes les candidatures en attente",
+                "operationId": "a02a6927ef661186c69c24e109c58bb9",
+                "responses": {
+                    "200": {
+                        "description": "succes"
+                    }
+                }
+            }
+        },
+        "/listeAccepter": {
+            "get": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet de voir toutes les candidatures accepter",
+                "operationId": "410c8fb1c7da8f2ebbe4f47e4fefa24f",
+                "responses": {
+                    "200": {
+                        "description": "succes"
+                    }
+                }
+            }
+        },
+        "/listeRefuser": {
+            "get": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet de voir toutes les candidatures refuser",
+                "operationId": "e978c91c43e3c454e5bcc453ef29254a",
+                "responses": {
+                    "200": {
+                        "description": "succes"
+                    }
+                }
+            }
+        },
+        "/candidater": {
+            "post": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet à un candidat de candidater à une formation",
+                "operationId": "3e687d4a77b5959cec344d93d87e0d9c",
+                "responses": {
+                    "201": {
+                        "description": "Candidature envoyer avec succès"
+                    }
+                }
+            }
+        },
+        "/accepter/{candidature}": {
+            "post": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet d'accepter une candidature",
+                "operationId": "ba0f5ca02288b2a1098814d73b2f92b0",
+                "parameters": [
+                    {
+                        "name": "candidature",
+                        "in": "path",
+                        "description": "ID candidature",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "candidature accepter avec succès"
+                    }
+                }
+            }
+        },
+        "/refuser/{candidature}": {
+            "post": {
+                "tags": [
+                    "Candidature"
+                ],
+                "summary": "Cette route permet de refuser une candidature",
+                "operationId": "4648ac3249f42c58c6b6d6625885b277",
+                "parameters": [
+                    {
+                        "name": "candidature",
+                        "in": "path",
+                        "description": "ID candidature",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "candidature refuser avec succès"
+                    }
+                }
+            }
+        },
+        "/creerFormation": {
+            "post": {
+                "tags": [
+                    "Formation"
+                ],
+                "summary": "Cette route permet de creer une formation",
+                "operationId": "d3b0e0cbddb9d971abec51cb196a2978",
+                "responses": {
+                    "201": {
+                        "description": "Formation Creer avec succès"
+                    }
+                }
+            }
+        },
+        "/modifierFormation/{formation}": {
+            "post": {
+                "tags": [
+                    "Formation"
+                ],
+                "summary": "Cette route permet de modifier une formation",
+                "operationId": "40b5a7806692a49bb5226f7723893d6e",
+                "parameters": [
+                    {
+                        "name": "formation",
+                        "in": "path",
+                        "description": "ID formation",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Formation modifier avec succès"
+                    }
+                }
+            }
+        },
+        "/supprimerFormation/{formation}": {
+            "delete": {
+                "tags": [
+                    "Formation"
+                ],
+                "summary": "Cette route permet de supprimer une formation",
+                "operationId": "2d2219d0e05c86c24c1453954deb3f48",
+                "parameters": [
+                    {
+                        "name": "formation",
+                        "in": "path",
+                        "description": "ID formation",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Formation supprimer avec succès"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cette route permet d'enregistrer un candidat ",
+                "operationId": "96c6114f12ed09d2328f8b0b158734fb",
+                "responses": {
+                    "201": {
+                        "description": "Candidat Creer avec succès"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cette route permet de connecter un candidat ou un administrateur ",
+                "operationId": "abc53c091ac89d7a2af0892997d1ee08",
+                "responses": {
+                    "201": {
+                        "description": "Vous êtes connecté avec succès"
+                    }
+                }
+            }
+        },
+        "/dashboardAdmin": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cette route permet de rediger un administrateur à son dahsboard une fois qu'il est connecté ",
+                "operationId": "84721a26c29fdc278fba208558202542",
+                "responses": {
+                    "200": {
+                        "description": "Bienvenue à votre dashboard"
+                    }
+                }
+            }
+        },
+        "/dashboardCandidat": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cette route permet de rediger un candidat à son dahsboard une fois qu'il est connecté ",
+                "operationId": "dab3f0b8900e13531726c6aefded325f",
+                "responses": {
+                    "200": {
+                        "description": "Bienvenue à votre dashboard"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cette route permet de deconnecter un candidat ou un administrateur ",
+                "operationId": "27282c80c923a9a2205bfbd46ab906ee",
+                "responses": {
+                    "200": {
+                        "description": "Vous êtes deconnectez"
+                    }
+                }
+            }
+        }
+    }
+}

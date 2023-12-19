@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use OpenApi\Annotations as OA;
+
 
 class UserController extends Controller
 {
@@ -28,6 +30,15 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+
+       /**
+     * @OA\Post(
+     *     path="/register",
+     *     tags={"User"},
+     *     summary="Cette route permet d'enregistrer un candidat ",
+     *     @OA\Response(response="201", description="Candidat Creer avec succès")
+     * )
      */
     public function store(Request $request)
     {
@@ -56,6 +67,15 @@ class UserController extends Controller
 
        
     }
+
+     /**
+     * @OA\Post(
+     *     path="/login",
+     *      tags={"User"},
+     *     summary="Cette route permet de connecter un candidat ou un administrateur ",
+     *     @OA\Response(response="201", description="Vous êtes connecté avec succès")
+     * )
+     */
 
     public function login(Request $request)
 {
@@ -92,6 +112,15 @@ class UserController extends Controller
         'datas' => $user,
     ]);
 }
+
+   /**
+     * @OA\Get(
+     *     path="/dashboardAdmin",
+     *     tags={"User"},
+     *     summary="Cette route permet de rediger un administrateur à son dahsboard une fois qu'il est connecté ",
+     *     @OA\Response(response="200", description="Bienvenue à votre dashboard")
+     * )
+     */
    
 public function dashboardAdmin(){
     $user= auth()->user();
@@ -102,6 +131,15 @@ public function dashboardAdmin(){
     ]);
 }
 
+  /**
+     * @OA\Get(
+     *     path="/dashboardCandidat",
+     *     tags={"User"},
+     *     summary="Cette route permet de rediger un candidat à son dahsboard une fois qu'il est connecté ",
+     *     @OA\Response(response="200", description="Bienvenue à votre dashboard")
+     * )
+     */
+
 public function dashboardCandidat(){
     $user= auth()->user();
 
@@ -111,7 +149,16 @@ public function dashboardCandidat(){
     ]);
 }
 
-public function logout()
+  /**
+     * @OA\Get(
+     *     path="/logout",
+     *     tags={"User"},
+     *     summary="Cette route permet de deconnecter un candidat ou un administrateur ",
+     *     @OA\Response(response="200", description="Vous êtes deconnectez")
+     * )
+     */
+
+    public function logout()
     {
         auth()->logout();
 

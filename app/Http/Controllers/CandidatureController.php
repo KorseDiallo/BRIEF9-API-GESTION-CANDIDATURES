@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Candidature;
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
+
 
 class CandidatureController extends Controller
 {
     /**
      * Display a listing of the resource.
+     */
+
+      /**
+     * @OA\Get(
+     *     path="/listeEnAttente",
+     *     tags={"Candidature"},
+     *     
+     *     summary="Cette route permet de voir toutes les candidatures en attente",
+     *     @OA\Response(response="200", description="succes")
+     * )
      */
     public function index()
     {
@@ -22,6 +34,16 @@ class CandidatureController extends Controller
         ]);
     }
 
+     /**
+     * @OA\Get(
+     *     path="/listeAccepter",
+
+     *  tags={"Candidature"},         
+     *     summary="Cette route permet de voir toutes les candidatures accepter",
+     *     @OA\Response(response="200", description="succes")
+     * )
+     */
+
     public function listeAccepter(){
         $listesAccepter = Candidature::where("status","accepter")->get();
 
@@ -31,6 +53,16 @@ class CandidatureController extends Controller
             "data"=>$listesAccepter
         ]);
     }
+
+      /**
+     * @OA\Get(
+     *     path="/listeRefuser",
+ 
+     *   tags={"Candidature"},  
+      *     summary="Cette route permet de voir toutes les candidatures refuser",
+     *     @OA\Response(response="200", description="succes")
+     * )
+     */
 
     public function listeRefuser(){
         $listesRefuser = Candidature::where("status","refuser")->get();
@@ -52,6 +84,16 @@ class CandidatureController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+
+      /**
+     * @OA\Post(
+     *     path="/candidater",
+   
+       *   tags={"Candidature"},  
+      *     summary="Cette route permet à un candidat de candidater à une formation",
+     *     @OA\Response(response="201", description="Candidature envoyer avec succès")
+     * )
      */
     public function store(Request $request)
     {
@@ -88,6 +130,22 @@ class CandidatureController extends Controller
         }
     }
 
+     /**
+     * @OA\Post(
+     *     path="/accepter/{candidature}",
+     *    tags={"Candidature"},
+     *     summary="Cette route permet d'accepter une candidature",
+     *      @OA\Parameter(
+     *         name="candidature",
+     *         in="path",
+     *         required=true,
+     *         description="ID candidature",
+     *         @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="201", description="candidature accepter avec succès")
+     * )
+     */
+
     public function accepter(Candidature $candidature)
     {
         // dd($candidature);
@@ -113,6 +171,21 @@ class CandidatureController extends Controller
         }
     }
     
+     /**
+     * @OA\Post(
+     *     path="/refuser/{candidature}",
+     *    tags={"Candidature"},
+     *     summary="Cette route permet de refuser une candidature",
+     *      @OA\Parameter(
+     *         name="candidature",
+     *         in="path",
+     *         required=true,
+     *         description="ID candidature",
+     *         @OA\Schema(type="integer")
+     *      ),
+     *     @OA\Response(response="201", description="candidature refuser avec succès")
+     * )
+     */
 
     public function refuser(Candidature $candidature)
     {
