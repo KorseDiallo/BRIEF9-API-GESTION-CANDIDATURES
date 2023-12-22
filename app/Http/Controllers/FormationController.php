@@ -16,8 +16,18 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        $formation= Formation::all();
+
+        if($formation){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Liste des Formations",
+                "data"=>$formation
+            ]);
+        }
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

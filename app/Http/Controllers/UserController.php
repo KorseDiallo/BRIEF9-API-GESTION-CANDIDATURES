@@ -20,6 +20,18 @@ class UserController extends Controller
         //
     }
 
+    public function listeCandidat(){
+        $listeCandidat= User::where('role','Candidat')->get();
+
+        if($listeCandidat){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Liste des candidats",
+                "data"=>$listeCandidat
+            ]);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -106,6 +118,8 @@ class UserController extends Controller
         $message = 'Vous êtes connecté en tant qu\'administrateur';
     } elseif ($role === 'Candidat') {
         $message = 'Vous êtes connecté en tant que candidat';
+    }else{
+        $message = 'Vous avez pas les autorisatons';
     } 
 
     return response()->json([

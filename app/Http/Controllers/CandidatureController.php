@@ -34,6 +34,17 @@ class CandidatureController extends Controller
         ]);
     }
 
+    public function listeCandidature(){
+        $listeCandidature= Candidature::all();
+        if($listeCandidature){
+            return response()->json([
+                "status"=>true,
+                "message"=> "Liste de tous les candidats",
+                "data"=> $listeCandidature
+            ]);
+        }
+    }
+
      /**
      * @OA\Get(
      *     path="/listeAccepter",

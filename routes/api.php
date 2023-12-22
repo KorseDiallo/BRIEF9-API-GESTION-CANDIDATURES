@@ -26,6 +26,8 @@ Route::middleware(['auth:api','candidat'])->group(function(){
 Route::middleware(['auth:api','admin'])->group(function(){
     Route::get('/dashboardAdmin',[UserController::class,'dashboardAdmin']);
     Route::post('/creerFormation',[FormationController::class,'store']);
+    Route::get('/listeCandidat',[UserController::class,'listeCandidat']);
+    Route::get('/listeCandidature',[CandidatureController::class,'listeCandidature']);
     Route::post('/modifierFormation/{formation}',[FormationController::class,'update']);
     Route::delete('/supprimerFormation/{formation}',[FormationController::class,'destroy']);
     Route::post('/accepter/{candidature}',[CandidatureController::class,'accepter']);
@@ -36,7 +38,7 @@ Route::middleware(['auth:api','admin'])->group(function(){
     Route::get('/logout',[UserController::class,'logout']);
 });
 
-
+Route::get('/listeFormation',[FormationController::class,'index']);
 
 Route::post('/register',[UserController::class,'store']);
 
